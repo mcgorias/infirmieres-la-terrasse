@@ -110,6 +110,14 @@
             font-size: 1.1rem;
         }
 
+        .phone-header .phone-invite {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gris-chaud);
+            margin-top: 0.15rem;
+        }
+
         /* Navigation */
         nav {
             background: var(--blanc-pur);
@@ -186,6 +194,65 @@
             color: var(--gris-chaud);
             max-width: 700px;
             margin: 0 auto;
+        }
+
+        .intro-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-status .status-dot {
+            width: 0.65rem;
+            height: 0.65rem;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .intro-section.status-open {
+            background: var(--teal-clair);
+            border-color: var(--teal-confiance);
+        }
+
+        .intro-section.status-open .intro-status {
+            color: var(--teal-confiance);
+        }
+
+        .intro-section.status-open .status-dot {
+            background: var(--teal-confiance);
+        }
+
+        .intro-section.status-closed {
+            background: var(--terracotta-clair);
+            border-color: var(--terracotta);
+        }
+
+        .intro-section.status-closed .intro-status {
+            color: var(--bordeaux);
+        }
+
+        .intro-section.status-closed .status-dot {
+            background: var(--terracotta);
+        }
+
+        .intro-invite {
+            font-size: 0.95rem;
+            color: var(--gris-chaud);
+            max-width: 700px;
+            margin: 0.5rem auto 0;
+        }
+
+        .intro-invite a {
+            color: var(--bordeaux);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .intro-invite a:hover {
+            text-decoration: underline;
         }
 
         /* Info cards grid */
@@ -449,13 +516,30 @@
                 text-align: center;
             }
 
-            nav {
-                overflow-x: auto;
+            nav .nav-container {
+                flex-wrap: wrap;
+                gap: 0;
             }
 
             nav a {
-                padding: 0.75rem 1rem;
-                font-size: 1rem;
+                padding: 0.65rem 0.5rem;
+                font-size: 0.85rem;
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .phone-header {
+                order: -1;
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            .phone-header a {
+                font-size: 1.3rem;
+            }
+
+            .phone-header .phone-invite {
+                font-size: 0.85rem;
             }
         }
 
@@ -633,6 +717,7 @@
             </div>
             <div class="phone-header">
                 <a href="tel:+33476082270">04.76.08.22.70</a>
+                <span class="phone-invite" id="phone-invite">Joindre le cabinet</span>
             </div>
         </div>
     </header>
@@ -649,8 +734,10 @@
     <main id="main">
         <!-- HOME CONTENT -->
         <div class="home-only">
-            <section id="informations" class="intro-section">
-                <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Cabinet infirmier conventionné Assurance Maladie • Soins à domicile • Disponible 7j/7 de 7h30 à 20h</p>
+            <section id="informations" class="intro-section" data-open-start="7:30" data-open-end="20:00">
+                <p class="intro-status"><span class="status-dot" aria-hidden="true"></span><span id="intro-status-text">Cabinet infirmier conventionné Assurance Maladie</span></p>
+                <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Soins à domicile • Disponible 7j/7 de 7h30 à 20h</p>
+                <p class="intro-invite" id="intro-invite"></p>
             </section>
 
             <section id="contact">
@@ -839,6 +926,35 @@
     </footer>
 
     <script>
+        // Statut d'ouverture dynamique (7j/7, 7h30-20h00, heure locale du visiteur)
+        (function() {
+            const section = document.getElementById('informations');
+            if (!section) return;
+            const statusText = document.getElementById('intro-status-text');
+            const invite = document.getElementById('intro-invite');
+            const phoneInvite = document.getElementById('phone-invite');
+            const tel = '0476082270';
+            const telDisplay = '04.76.08.22.70';
+
+            const now = new Date();
+            const minutes = now.getHours() * 60 + now.getMinutes();
+            const openStart = 7 * 60 + 30;
+            const openEnd = 20 * 60;
+            const isOpen = minutes >= openStart && minutes < openEnd;
+
+            section.classList.add(isOpen ? 'status-open' : 'status-closed');
+
+            if (isOpen) {
+                statusText.textContent = 'Cabinet actuellement ouvert';
+                invite.innerHTML = 'Un appel ou un SMS au <a href="tel:+33' + tel.slice(1) + '">' + telDisplay + '</a> permet de joindre le cabinet.';
+                if (phoneInvite) phoneInvite.textContent = 'Joindre le cabinet';
+            } else {
+                statusText.textContent = 'Cabinet actuellement fermé';
+                invite.innerHTML = 'En dehors des horaires, un SMS ou un message vocal au <a href="tel:+33' + tel.slice(1) + '">' + telDisplay + '</a> reste possible.';
+                if (phoneInvite) phoneInvite.textContent = 'Laisser un message ou un SMS';
+            }
+        })();
+
         // Chargement différé de Google Maps (consentement cookies tiers)
         document.getElementById('load-map-btn')?.addEventListener('click', function() {
             const iframe = document.getElementById('map-iframe');
