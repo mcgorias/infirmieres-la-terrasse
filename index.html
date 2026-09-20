@@ -640,8 +640,8 @@
     <nav>
         <div class="nav-container">
             <a href="#informations">Informations pratiques</a>
-            <a href="#services">Questions fréquentes</a>
             <a href="#contact">Contact</a>
+            <a href="#services">Questions fréquentes</a>
             <a href="#mentions">Mentions légales</a>
         </div>
     </nav>
@@ -651,6 +651,46 @@
         <div class="home-only">
             <section id="informations" class="intro-section">
                 <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Cabinet infirmier conventionné Assurance Maladie • Soins à domicile • Disponible 7j/7 de 7h30 à 20h</p>
+            </section>
+
+            <section id="contact">
+                <h2>Nous contacter</h2>
+                <div class="contact-grid">
+                    <div class="info-grid" style="grid-template-columns: 1fr; gap: 1rem;">
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Adresse</h3>
+                            <p>31 impasse du Buis<br>Carré Santé<br>38660 La Terrasse</p>
+                        </div>
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>Téléphone</h3>
+                            <p><a href="tel:+33476082270">04.76.08.22.70</a></p>
+                        </div>
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>Email</h3>
+                            <p><a href="mailto:idellacave@gmail.com">idellacave@gmail.com</a></p>
+                        </div>
+                        <div class="info-card info-card--confiance">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg>Horaires</h3>
+                            <p>7 jours sur 7<br>7h30 - 20h</p>
+                        </div>
+                        <div class="info-card info-card--confiance">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Secteurs desservis</h3>
+                            <p>La Terrasse • Lumbin • Petit Lumbin<br>La Frette • Le Carré • Chonas<br>Route de Montabon • Le Touvet</p>
+                        </div>
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Infirmières</h3>
+                            <p>Cindy Mayorgas<br>Claire Blancheton</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <div class="map-consent" id="map-consent">
+                            <svg aria-hidden="true"><use href="#icon-pin"></use></svg>
+                            <p>Cette carte est fournie par Google Maps et dépose des cookies tiers lors de son chargement.</p>
+                            <button type="button" class="mentions-button" id="load-map-btn">Afficher la carte</button>
+                        </div>
+                        <iframe id="map-iframe" data-src="https://www.google.com/maps?q=31+Impasse+du+Buis,+Carr%C3%A9+Sant%C3%A9,+38660+La+Terrasse&output=embed" title="Localisation du cabinet - 31 impasse du Buis, Carré Santé, 38660 La Terrasse" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" hidden></iframe>
+                    </div>
+                </div>
             </section>
 
             <section id="services">
@@ -712,45 +752,6 @@
                 </div>
             </section>
 
-            <section id="contact">
-                <h2>Nous contacter</h2>
-                <div class="contact-grid">
-                    <div class="info-grid" style="grid-template-columns: 1fr; gap: 1rem;">
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Adresse</h3>
-                            <p>31 impasse du Buis<br>Carré Santé<br>38660 La Terrasse</p>
-                        </div>
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>Téléphone</h3>
-                            <p><a href="tel:+33476082270">04.76.08.22.70</a></p>
-                        </div>
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>Email</h3>
-                            <p><a href="mailto:idellacave@gmail.com">idellacave@gmail.com</a></p>
-                        </div>
-                        <div class="info-card info-card--confiance">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg>Horaires</h3>
-                            <p>7 jours sur 7<br>7h30 - 20h</p>
-                        </div>
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Infirmières</h3>
-                            <p>Cindy Mayorgas<br>Claire Blancheton</p>
-                        </div>
-                        <div class="info-card info-card--confiance">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Secteurs desservis</h3>
-                            <p>La Terrasse • Lumbin • Petit Lumbin<br>La Frette • Le Carré • Chonas<br>Route de Montabon • Le Touvet</p>
-                        </div>
-                    </div>
-                    <div class="map-container">
-                        <div class="map-consent" id="map-consent">
-                            <svg aria-hidden="true"><use href="#icon-pin"></use></svg>
-                            <p>Cette carte est fournie par Google Maps et dépose des cookies tiers lors de son chargement.</p>
-                            <button type="button" class="mentions-button" id="load-map-btn">Afficher la carte</button>
-                        </div>
-                        <iframe id="map-iframe" data-src="https://www.google.com/maps?q=31+Impasse+du+Buis,+Carr%C3%A9+Sant%C3%A9,+38660+La+Terrasse&output=embed" title="Localisation du cabinet - 31 impasse du Buis, Carré Santé, 38660 La Terrasse" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" hidden></iframe>
-                    </div>
-                </div>
-            </section>
         </div>
 
         <!-- MENTIONS LÉGALES PAGE -->
