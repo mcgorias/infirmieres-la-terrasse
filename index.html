@@ -9,7 +9,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Cartographie des secteurs : Leaflet + Jawg Maps (fournisseur français, aucun cookie déposé) -->
+    <link rel="preconnect" href="https://tile.jawg.io" crossorigin>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH"
+            crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     <style>
+
+        section {
+            margin-top: 1em;
+        }
         :root {
             --bordeaux: #AF363D;
             --terracotta: #C2A380;
@@ -64,8 +76,8 @@
         }
 
         .logo-icon {
-            width: 72px;
-            height: 72px;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -133,10 +145,6 @@
             padding: 0 1rem;
         }
 
-        section {
-            padding: 3rem 0;
-        }
-
         h2 {
             font-family: 'Poppins', sans-serif;
             font-size: 2rem;
@@ -187,7 +195,7 @@
         }
 
         .intro-section.status-open {
-            background: var(--teal-clair);
+            background: var(--blanc-pur);
             border-color: var(--teal-confiance);
         }
 
@@ -200,7 +208,7 @@
         }
 
         .intro-section.status-closed {
-            background: var(--terracotta-clair);
+            background: var(--blanc-pur);
             border-color: var(--terracotta);
         }
 
@@ -217,6 +225,15 @@
             color: var(--gris-chaud);
             max-width: 700px;
             margin: 0.5rem auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .intro-invite .icon {
+            display: block;
         }
 
         .intro-invite a {
@@ -226,6 +243,34 @@
         }
 
         .intro-invite a:hover {
+            text-decoration: underline;
+        }
+
+        /* Appel du cabinet : simple lien en ligne sur grand écran,
+           bouton tactile en dessous de 768px (voir media query). */
+        .intro-invite .intro-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gris-chaud);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .intro-cta-text {
+            display: inline-flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .intro-cta-tel {
+            color: var(--bordeaux);
+            font-weight: 600;
+        }
+
+        .intro-invite .intro-cta:hover .intro-cta-tel,
+        .intro-invite .intro-cta:focus-visible .intro-cta-tel {
             text-decoration: underline;
         }
 
@@ -256,22 +301,63 @@
             margin-bottom: 1rem;
         }
 
-        .info-card.info-card--confiance {
-            border-left-color: var(--teal-confiance);
-            background: linear-gradient(180deg, var(--teal-clair) 0%, var(--blanc-pur) 55%);
-        }
-
-        .info-card.info-card--confiance h3 {
-            color: var(--teal-confiance);
-        }
-
-        .info-card.info-card--confiance .icon {
-            stroke: var(--teal-confiance);
-        }
-
         .info-card p {
             color: var(--gris-chaud);
             font-size: 1rem;
+        }
+
+        /* Carte pratique fusionnée : horaires, adresse, contact, équipe */
+        .info-list {
+            display: grid;
+            gap: 0;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: minmax(150px, auto) 1fr;
+            gap: 0.5rem 1.5rem;
+            align-items: start;
+            padding: 0.9rem 0;
+            border-top: 1px solid rgba(175, 54, 61, 0.12);
+        }
+
+        .info-row:first-child {
+            border-top: 0;
+            padding-top: 0;
+        }
+
+        .info-row:last-child {
+            padding-bottom: 0;
+        }
+
+        .info-row dt {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 600;
+            color: var(--encre);
+        }
+
+        .info-row dt .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .info-row dd {
+            margin: 0;
+            color: var(--gris-chaud);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Ligne « Secteurs desservis » : les puces occupent toute la largeur de la carte */
+        .info-row--secteurs {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .info-row--secteurs dt .icon {
+            stroke: var(--teal-confiance);
         }
 
         .info-card h3 {
@@ -436,56 +522,263 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
+            /* Chaque colonne garde sa hauteur propre : pas d'étirement de l'une sur l'autre */
             align-items: start;
+        }
+
+        .contact-grid > .info-grid {
+            margin-bottom: 0;
         }
 
         .map-container {
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            display: block;
-        }
-
-        .map-consent {
             background: var(--blanc-pur);
-            padding: 2rem;
-            height: 400px;
+            /* Contexte d'empilement : garde les calques Leaflet sous la navigation sticky */
+            position: relative;
+            z-index: 0;
             display: flex;
             flex-direction: column;
+        }
+
+        .secteurs-map {
+            width: 100%;
+            height: 400px;
+            background: var(--teal-clair);
+        }
+
+        .map-fallback {
+            display: flex;
             align-items: center;
             justify-content: center;
+            height: 100%;
+            padding: 2rem;
             text-align: center;
-            gap: 0.5rem;
-        }
-
-        .map-consent svg {
-            width: 32px;
-            height: 32px;
-            stroke: var(--terracotta);
-            fill: none;
-            stroke-width: 1.75;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            margin-bottom: 0.5rem;
-        }
-
-        .map-consent p {
             color: var(--gris-chaud);
-            max-width: 320px;
+        }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1.25rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            color: var(--gris-chaud);
+            border-top: 1px solid var(--terracotta-clair);
+        }
+
+        .map-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .map-legend i {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex: 0 0 auto;
+        }
+
+        .map-legend .dot-cabinet { background: var(--bordeaux); }
+        .map-legend .dot-zone {
+            width: 16px;
+            border-radius: 3px;
+            background: rgba(194, 163, 128, 0.35);
+            border: 2.5px solid var(--teal-confiance);
+        }
+
+        .map-legend .dot-limite {
+            width: 16px;
+            border-radius: 3px;
+            background: none;
+            border: 1px solid var(--teal-confiance);
+        }
+
+        .map-legend .map-note {
+            flex-basis: 100%;
+            font-size: 0.78rem;
+            color: var(--gris-chaud);
+        }
+
+        .map-reset {
+            margin-left: auto;
+            font: inherit;
+            font-size: 0.85rem;
+            color: var(--teal-confiance);
+            background: none;
+            border: none;
+            border-bottom: 1px solid currentColor;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .map-reset:hover { color: var(--bordeaux); }
+
+        /* Puces de secteurs : activées par JS, elles recentrent la carte */
+        .secteur-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .secteur-chip {
+            font: inherit;
+            font-size: 0.9rem;
+            color: var(--teal-confiance);
+            background: var(--blanc-pur);
+            border: 1px solid var(--teal-confiance);
+            border-radius: 999px;
+            padding: 0.2rem 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .secteur-chip:disabled {
+            cursor: default;
+            opacity: 1;
+        }
+
+        .secteur-chip:not(:disabled):hover,
+        .secteur-chip:focus-visible,
+        .secteur-chip[aria-pressed="true"] {
+            background: var(--teal-confiance);
+            color: var(--blanc-pur);
+        }
+
+        /* Habillage Leaflet aux couleurs de la charte */
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+            background: var(--teal-clair);
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: var(--border-radius);
+            color: var(--encre);
+        }
+
+        .leaflet-popup-content {
+            margin: 0.85rem 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .leaflet-popup-content strong {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            color: var(--bordeaux);
+        }
+
+        .leaflet-bar a,
+        .leaflet-bar a:hover {
+            color: var(--bordeaux);
+        }
+
+        .leaflet-container a.leaflet-popup-close-button { color: var(--gris-chaud); }
+
+        .map-pin {
+            display: block;
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--blanc-pur);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+            background: var(--bordeaux);
+        }
+
+        .leaflet-tooltip.commune-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            color: var(--teal-confiance);
+            background: var(--blanc-pur);
+            border: 1px solid var(--terracotta-clair);
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        }
+
+        .leaflet-popup-content small {
+            display: block;
+            margin-top: 0.35rem;
+            color: var(--gris-chaud);
+        }
+
+        /* Bouton d'appel masqué hors mobile */
+        #call-button {
+            display: none;
         }
 
         @media (max-width: 768px) {
+            #call-button {
+                display: block;
+            }
+
+            /* Bouton d'appel tactile, réservé au mobile */
+            .intro-invite .intro-cta {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                gap: 0.75rem;
+                min-height: 48px;
+                padding: 0.65rem 1.25rem;
+                background: var(--blanc-pur);
+                border: 1px solid var(--terracotta);
+                border-radius: 999px;
+                box-shadow: 0 1px 2px rgba(43, 36, 32, 0.06);
+                transition: background 0.3s ease, border-color 0.3s ease;
+            }
+
+            .intro-section.status-closed .intro-cta {
+                background: var(--blanc-casse);
+            }
+
+            .intro-invite .intro-cta:hover,
+            .intro-invite .intro-cta:focus-visible {
+                background: var(--blanc-casse);
+                border-color: var(--bordeaux);
+            }
+
+            .intro-cta-text {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                line-height: 1.25;
+            }
+
+            .intro-cta-label {
+                font-size: 0.85rem;
+                color: var(--gris-chaud);
+            }
+
+            .intro-cta-tel {
+                font-family: 'Poppins', sans-serif;
+                font-size: 1.1rem;
+            }
+
+            .intro-invite .intro-cta:hover .intro-cta-tel,
+            .intro-invite .intro-cta:focus-visible .intro-cta-tel {
+                text-decoration: none;
+            }
+
+            .info-row {
+                grid-template-columns: 1fr;
+                gap: 0.35rem;
+            }
+
+            .info-row--secteurs {
+                gap: 0.6rem;
+            }
+
             .contact-grid {
                 grid-template-columns: 1fr;
             }
 
-            .map-container iframe {
+            .secteurs-map {
                 height: 300px;
             }
 
@@ -511,13 +804,14 @@
                 left: 0;
                 top: 50%;
                 transform: translateY(-50%);
-                width: 56px;
-                height: 56px;
+                width: 82px;
+                height: 82px;
             }
 
             .logo-text {
+                margin-left: 100px;
                 width: 100%;
-                text-align: center;
+                text-align: left;
             }
 
             nav .nav-container {
@@ -544,6 +838,7 @@
         }
 
         .legal-notice {
+            margin-top: 2rem;
             background: var(--bordeaux);
             color: var(--blanc-pur);
             padding: 1.5rem 1rem;
@@ -699,7 +994,7 @@
         <div class="header-container">
             <div class="logo-section">
                 <div class="logo-icon">
-                    <img src="assets/logo.svg" alt="Logo du Cabinet Infirmier La Terrasse : cœur en forme de stéthoscope">
+                    <img src="assets/logo-infirmiere.svg" alt="Logo du Cabinet Infirmier La Terrasse : cœur en forme de stéthoscope">
                 </div>
                 <div class="logo-text">
                     <h1>Cabinet Infirmier<br>La Terrasse</h1>
@@ -721,48 +1016,91 @@
     <main id="main">
         <!-- HOME CONTENT -->
         <div class="home-only">
+            
             <section id="informations" class="intro-section" data-open-start="7:30" data-open-end="20:00">
-                <p class="intro-status"><span class="status-dot" aria-hidden="true"></span><span id="intro-status-text">Cabinet infirmier conventionné Assurance Maladie</span></p>
-                <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Soins à domicile • Disponible 7j/7 de 7h30 à 20h</p>
-                <p class="intro-invite" id="intro-invite"></p>
+                <p class="intro-status"></span><span id="intro-status-text">Cabinet infirmier conventionné Assurance Maladie</span></p>
+                
+                <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Soins à domicile 7j/7 de 7h30 à 20h</p>
+            </section>
+            <section id="call-button">
+                <p class="intro-invite" id="intro-invite">
+                    <a class="intro-cta" href="tel:+33476082270" aria-label="Joindre le cabinet au 04 76 08 22 70">
+                        <svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>
+                        <span class="intro-cta-text">
+                            <span class="intro-cta-label">Joindre le cabinet</span>
+                            <span class="intro-cta-tel">04.76.08.22.70</span>
+                        </span>
+                    </a>
+                </p>
             </section>
 
             <section id="contact">
-                <h2>Nous contacter</h2>
                 <div class="contact-grid">
                     <div class="info-grid" style="grid-template-columns: 1fr; gap: 1rem;">
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Adresse</h3>
-                            <p>31 impasse du Buis<br>Carré Santé<br>38660 La Terrasse</p>
-                        </div>
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>Téléphone</h3>
-                            <p><a href="tel:+33476082270">04.76.08.22.70</a></p>
-                        </div>
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>Email</h3>
-                            <p><a href="mailto:idellacave@gmail.com">idellacave@gmail.com</a></p>
-                        </div>
-                        <div class="info-card info-card--confiance">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg>Horaires</h3>
-                            <p>7 jours sur 7<br>7h30 - 20h</p>
-                        </div>
-                        <div class="info-card info-card--confiance">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Secteurs desservis</h3>
-                            <p>La Terrasse • Lumbin • Petit Lumbin<br>La Frette • Le Carré • Chonas<br>Route de Montabon • Le Touvet</p>
-                        </div>
-                        <div class="info-card">
-                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Infirmières</h3>
-                            <p>Cindy Mayorgas<br>Claire Blancheton</p>
+                        
+                        <div class="info-card info-card--pratique">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>Le cabinet</h3>
+                            <dl class="info-list">
+                                <div class="info-row">
+                                    <dt><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Secteurs</dt>
+                                    <dd>
+                                        <ul class="secteur-list" id="secteur-list">
+                                            <li><button type="button" class="secteur-chip" data-secteur="la-terrasse" disabled>La Terrasse</button></li>
+                                            <li><button type="button" class="secteur-chip" data-secteur="lumbin" disabled>Lumbin</button></li>
+                                            <li><button type="button" class="secteur-chip" data-secteur="petit-lumbin" disabled>Petit Lumbin</button></li>
+                                            <li><button type="button" class="secteur-chip" data-secteur="la-frette" disabled>La Frette</button></li>
+                                            <li><button type="button" class="secteur-chip" data-secteur="le-carre" disabled>Le Carré</button></li>
+                                            <li><button type="button" class="secteur-chip" data-secteur="chonas" disabled>Chonas</button></li>
+                                            <li><button type="button" class="secteur-chip" data-secteur="route-de-montabon" disabled>Route de Montabon</button></li>
+                                            <li><button type="button" class="secteur-chip" data-secteur="le-touvet" disabled>Le Touvet</button></li>
+                                        </ul>
+                                    </dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg>Horaires</dt>
+                                    <dd>7 jours sur 7<br>7h30 - 20h</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Adresse</dt>
+                                    <dd>31 impasse du Buis<br>Carré Santé<br>38660 La Terrasse</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt><svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>Téléphone</dt>
+                                    <dd><a href="tel:+33476082270">04.76.08.22.70</a></dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt><svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>Email</dt>
+                                    <dd><a href="mailto:idellacave@gmail.com">idellacave@gmail.com</a></dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Infirmières</dt>
+                                    <dd>Cindy Mayorgas<br>Claire Blancheton</dd>
+                                </div>
+                            </dl>
                         </div>
                     </div>
                     <div class="map-container">
-                        <div class="map-consent" id="map-consent">
-                            <svg aria-hidden="true"><use href="#icon-pin"></use></svg>
-                            <p>Cette carte est fournie par Google Maps et dépose des cookies tiers lors de son chargement.</p>
-                            <button type="button" class="mentions-button" id="load-map-btn">Afficher la carte</button>
+                        <!-- Jeton Jawg Maps dans data-jawg-token (https://www.jawg.io/lab/).
+                             Styles disponibles : jawg-sunny, jawg-streets, jawg-light, jawg-terrain, jawg-lagoon.
+                             Sans jeton valide, la carte bascule automatiquement sur les tuiles OpenStreetMap.
+                             Contours et points desservis : assets/secteurs.geojson -->
+                        <div id="secteurs-map"
+                             class="secteurs-map"
+                             role="application"
+                             aria-label="Carte des secteurs desservis par le cabinet : La Terrasse, Lumbin, Petit Lumbin, La Frette, Le Carré, Chonas, Route de Montabon et Le Touvet"
+                             data-jawg-token="xMCPkIoVYl5HFB0pUILTUQiZJTaPFQENbIJcDZaJdhmKn0TWH0gfxu3EiJYZtbD3"
+                             data-jawg-style="jawg-sunny">
+                            <p class="map-fallback" id="map-fallback">Chargement de la carte des secteurs desservis…</p>
                         </div>
-                        <iframe id="map-iframe" data-src="https://www.google.com/maps?q=31+Impasse+du+Buis,+Carr%C3%A9+Sant%C3%A9,+38660+La+Terrasse&output=embed" title="Localisation du cabinet - 31 impasse du Buis, Carré Santé, 38660 La Terrasse" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" hidden></iframe>
+                        <p class="map-legend">
+                            <span><i class="dot-cabinet" aria-hidden="true"></i>Cabinet</span>
+                            <span><i class="dot-zone" aria-hidden="true"></i>Zone d'intervention</span>
+                            <span><i class="dot-limite" aria-hidden="true"></i>Limites communales</span>
+                            <button type="button" class="map-reset" id="map-reset" hidden>Voir toute la zone</button>
+                        </p>
+                        <noscript>
+                            <p class="map-fallback">La carte interactive nécessite JavaScript. Secteurs desservis : La Terrasse, Lumbin, Petit Lumbin, La Frette, Le Carré, Chonas, Route de Montabon et Le Touvet. Cabinet : 31 impasse du Buis, Carré Santé, 38660 La Terrasse.</p>
+                        </noscript>
                     </div>
                 </div>
             </section>
@@ -865,8 +1203,9 @@
                     <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits d'accès, de rectification, de suppression et d'opposition concernant vos données personnelles. Pour exercer ces droits, contactez le cabinet à l'adresse indiquée ci-dessus.</p>
 
                     <h3>7. Cookies</h3>
-                    <p>Ce site intègre une carte Google Maps en section Contact. Pour éviter tout dépôt de cookies tiers sans consentement, cette carte ne se charge pas automatiquement : elle n'est affichée qu'après un clic explicite de l'internaute sur le bouton « Afficher la carte ». Aucun cookie Google Maps n'est déposé tant que cette action n'a pas été effectuée volontairement.</p>
-                    <p>En dehors de cette carte, ce site ne dépose aucun cookie de mesure d'audience ni de traceur publicitaire.</p>
+                    <p>La carte des secteurs desservis, en section « Informations générales », s'appuie sur la bibliothèque libre Leaflet et sur les fonds de carte de <strong>Jawg Maps</strong> (Jawg SAS, société française, données OpenStreetMap). Ce service ne dépose aucun cookie ni traceur sur votre terminal : seule votre adresse IP est transmise aux serveurs de Jawg, de façon techniquement nécessaire à l'affichage des tuiles cartographiques. Aucun consentement préalable n'est donc requis à ce titre.</p>
+                    <p>Les contours administratifs des communes affichés sur cette carte proviennent de l'<a href="https://geo.api.gouv.fr/decoupage-administratif" target="_blank" rel="noopener">API Découpage administratif</a> de l'État (etalab), établie à partir des données OpenStreetMap diffusées sous licence ODbL. Ils sont donnés à titre indicatif et ne constituent pas un engagement de prise en charge.</p>
+                    <p>Ce site ne dépose aucun cookie de mesure d'audience ni de traceur publicitaire.</p>
 
                     <h3>8. Déclaration de conformité déontologique</h3>
                     <p>Ce site a pour objet de fournir aux patients et à leurs proches des informations pratiques sur le cabinet (coordonnées, horaires, secteur d'intervention) ainsi que des repères éducatifs généraux, à caractère scientifique, sur des termes médicaux courants. Conformément à l'article R.4312-37 du code de la santé publique, il n'a pas vocation à faire la promotion de l'activité infirmière ni à décrire ou énumérer les soins dispensés par le cabinet.</p>
@@ -925,27 +1264,288 @@
             const minutes = now.getHours() * 60 + now.getMinutes();
             const openStart = 7 * 60 + 30;
             const openEnd = 20 * 60;
-            const isOpen = minutes >= openStart && minutes < openEnd;
-
+            const isOpen =  minutes >= openStart && minutes < openEnd;
+            
             section.classList.add(isOpen ? 'status-open' : 'status-closed');
+
+            // Bouton d'appel : même numéro dans les deux cas, seul l'intitulé change.
+            const ctaLabel = isOpen ? 'Joindre le cabinet' : 'Laisser un message vocal';
+            const cta = '<a class="intro-cta" href="tel:+33' + tel.slice(1) + '"'
+                + ' aria-label="' + ctaLabel + ' au ' + telDisplay.split('.').join(' ') + '">'
+                + '<svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>'
+                + '<span class="intro-cta-text">'
+                + '<span class="intro-cta-label">' + ctaLabel + '</span>'
+                + '<span class="intro-cta-tel">' + telDisplay + '</span>'
+                + '</span></a>';
 
             if (isOpen) {
                 statusText.textContent = 'Cabinet actuellement ouvert';
-                invite.innerHTML = 'Un appel ou un SMS au <a href="tel:+33' + tel.slice(1) + '">' + telDisplay + '</a> permet de joindre le cabinet.';
             } else {
-                statusText.textContent = 'Cabinet actuellement fermé';
-                invite.innerHTML = 'En dehors des horaires, un SMS ou un message vocal au <a href="tel:+33' + tel.slice(1) + '">' + telDisplay + '</a> reste possible.';
+                statusText.innerHTML = 'Cabinet actuellement fermé - Ouvre à 7h30';
             }
+            invite.innerHTML = cta;
         })();
 
-        // Chargement différé de Google Maps (consentement cookies tiers)
-        document.getElementById('load-map-btn')?.addEventListener('click', function() {
-            const iframe = document.getElementById('map-iframe');
-            const consent = document.getElementById('map-consent');
-            iframe.src = iframe.dataset.src;
-            iframe.hidden = false;
-            consent.remove();
-        });
+        // Carte des secteurs desservis — Leaflet + Jawg Maps
+        // Jawg est un fournisseur de tuiles français : aucun cookie n'est déposé, pas de bandeau de consentement.
+        // Le jeton d'accès se renseigne dans l'attribut data-jawg-token de #secteurs-map.
+        // Contours communaux, hameaux et cabinet sont décrits dans assets/secteurs.geojson.
+        (function() {
+            const el = document.getElementById('secteurs-map');
+            if (!el) return;
+
+            const GEOJSON = 'assets/secteurs.geojson';
+            const CABINET = { lat: 45.31559, lng: 5.92299 };   // vue initiale, avant chargement des contours
+
+            // Limites communales au trait fin, périmètre de la zone au trait épais.
+            const STYLE_COMMUNE = {
+                color: '#2F6B6B', weight: 0.8, opacity: 0.75,
+                fillColor: '#C2A380', fillOpacity: 0.18
+            };
+            const STYLE_COMMUNE_ACTIVE = {
+                color: '#AF363D', weight: 2, opacity: 1,
+                fillColor: '#AF363D', fillOpacity: 0.16
+            };
+            const STYLE_PERIMETRE = {
+                color: '#2F6B6B', weight: 3.5, opacity: 0.95,
+                fill: false, lineJoin: 'round', lineCap: 'round'
+            };
+
+            const chips = Array.prototype.slice.call(document.querySelectorAll('.secteur-chip'));
+            const resetBtn = document.getElementById('map-reset');
+            const fallback = document.getElementById('map-fallback');
+
+            const TEXTE_SECTEURS = 'Secteurs desservis : La Terrasse, Lumbin, Petit Lumbin, La Frette, Le Carré, Chonas, Route de Montabon et Le Touvet.';
+
+            function echec(message) {
+                if (fallback) fallback.textContent = message + ' ' + TEXTE_SECTEURS;
+            }
+
+            // Sur petit écran, les puces sont empilées au-dessus de la carte : un clic
+            // recentrerait la carte hors du champ de vision. On l'amène donc à l'écran,
+            // sous la navigation sticky.
+            function amenerCarteAEcran() {
+                if (!window.matchMedia || !window.matchMedia('(max-width: 768px)').matches) return;
+                const nav = document.querySelector('nav');
+                const marge = (nav ? nav.getBoundingClientRect().height : 0) + 12;
+                const cible = window.pageYOffset + el.getBoundingClientRect().top - marge;
+                window.scrollTo({ top: Math.max(cible, 0), behavior: 'smooth' });
+            }
+
+            function fond() {
+                const token = (el.dataset.jawgToken || '').trim();
+                const style = el.dataset.jawgStyle || 'jawg-sunny';
+                const osm = '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">&copy; OpenStreetMap</a>';
+                if (!token || token === 'JAWG_ACCESS_TOKEN') {
+                    // Repli tant que le jeton Jawg n'est pas renseigné.
+                    return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: osm, maxZoom: 19
+                    });
+                }
+                return L.tileLayer('https://tile.jawg.io/' + style + '/{z}/{x}/{y}{r}.png?access-token=' + token, {
+                    attribution: '<a href="https://www.jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank" rel="noopener">&copy; <b>Jawg</b>Maps</a> ' + osm,
+                    minZoom: 0,
+                    maxZoom: 20
+                });
+            }
+
+            function pin() {
+                return L.divIcon({
+                    className: 'map-pin-wrap',
+                    html: '<span class="map-pin"></span>',
+                    iconSize: [28, 28],
+                    iconAnchor: [14, 28],
+                    popupAnchor: [2, -26]
+                });
+            }
+
+            // Construit la carte à partir du GeoJSON : contours des communes, hameaux, cabinet.
+            function dessiner(map, donnees) {
+                const reperes = {};          // id de secteur → { focus, activer }
+                let enSelection = false;     // vrai le temps qu'une sélection s'applique (voir popupclose)
+                const communeParNom = {};    // « Lumbin » → « lumbin », pour rattacher un hameau à son contour
+                const groupe = L.featureGroup().addTo(map);
+
+                L.geoJSON(donnees, {
+                    filter: function(f) { return f.properties.type === 'commune'; },
+                    style: function() { return STYLE_COMMUNE; },
+                    onEachFeature: function(f, couche) {
+                        const prop = f.properties;
+                        communeParNom[prop.nom] = prop.id;
+                        couche.bindTooltip(prop.nom, { className: 'commune-label', sticky: true });
+                        couche.bindPopup('<strong>' + prop.nom + '</strong>' + prop.detail +
+                                         '<small>Contour administratif — commune INSEE ' + prop.code + '</small>');
+                        couche.on('click', function() { selectionner(prop.id, false); });
+                        reperes[prop.id] = {
+                            commune: prop.id,
+                            focus: function() {
+                                map.flyToBounds(couche.getBounds(), { padding: [16, 16], duration: 0.6 });
+                                couche.openPopup(couche.getBounds().getCenter());
+                            },
+                            activer: function(actif) {
+                                couche.setStyle(actif ? STYLE_COMMUNE_ACTIVE : STYLE_COMMUNE);
+                            }
+                        };
+                    }
+                }).addTo(groupe);
+
+                L.geoJSON(donnees, {
+                    filter: function(f) { return f.properties.type === 'perimetre'; },
+                    style: function() { return STYLE_PERIMETRE; },
+                    interactive: false   // le trait global ne doit pas intercepter les clics sur les communes
+                }).addTo(groupe);
+
+                L.geoJSON(donnees, {
+                    filter: function(f) { return f.properties.type === 'cabinet'; },
+                    pointToLayer: function(f, latlng) {
+                        return L.marker(latlng, {
+                            icon: pin(),
+                            title: f.properties.nom,
+                            alt: f.properties.nom,
+                            zIndexOffset: 1000,
+                            keyboard: true
+                        });
+                    },
+                    onEachFeature: function(f, couche) {
+                        couche.bindPopup('<strong>' + f.properties.nom + '</strong>' + f.properties.detail);
+                    }
+                }).addTo(groupe);
+
+                // Les hameaux sont trop rapprochés pour porter un repère permanent lisible :
+                // ils restent dans les données et ne s'affichent qu'au clic sur leur puce.
+                donnees.features.forEach(function(f) {
+                    if (f.properties.type !== 'hameau') return;
+                    const prop = f.properties;
+                    const point = L.latLng(f.geometry.coordinates[1], f.geometry.coordinates[0]);
+                    reperes[prop.id] = {
+                        commune: communeParNom[prop.commune],
+                        focus: function() {
+                            map.flyTo(point, 15, { duration: 0.6 });
+                            L.popup({ offset: [0, -4] })
+                                .setLatLng(point)
+                                .setContent('<strong>' + prop.nom + '</strong>' + prop.detail)
+                                .openOn(map);
+                        }
+                    };
+                });
+
+                // Sélection commune au clic sur une puce et au clic sur la carte : les deux
+                // passent par ici, l'état affiché reste donc toujours cohérent.
+                function selectionner(id, recentrer) {
+                    const repere = reperes[id];
+                    if (!repere) return;
+                    enSelection = true;
+                    chips.forEach(function(c) {
+                        c.setAttribute('aria-pressed', String(c.dataset.secteur === id));
+                    });
+                    Object.keys(reperes).forEach(function(k) {
+                        if (reperes[k].activer) reperes[k].activer(k === repere.commune);
+                    });
+                    if (recentrer) repere.focus();   // ferme le popup précédent, d'où le garde-fou
+                    enSelection = false;
+                }
+
+                function deselectionner() {
+                    chips.forEach(function(c) { c.setAttribute('aria-pressed', 'false'); });
+                    Object.keys(reperes).forEach(function(k) {
+                        if (reperes[k].activer) reperes[k].activer(false);
+                    });
+                }
+
+                function voirToutLaZone() {
+                    enSelection = true;
+                    map.closePopup();
+                    enSelection = false;
+                    deselectionner();
+                    map.flyToBounds(groupe.getBounds(), { padding: [12, 12], duration: 0.6 });
+                }
+
+                map.fitBounds(groupe.getBounds(), { padding: [12, 12] });
+                map.attributionControl.addAttribution(
+                    'contours <a href="https://geo.api.gouv.fr/decoupage-administratif" target="_blank" rel="noopener">geo.api.gouv.fr</a>');
+
+                // Fermeture du popup par le visiteur (croix ou clic à côté) : on relâche la sélection.
+                map.on('popupclose', function() {
+                    if (!enSelection) deselectionner();
+                });
+
+                chips.forEach(function(chip) {
+                    if (!reperes[chip.dataset.secteur]) return;
+                    chip.disabled = false;
+                    chip.setAttribute('aria-pressed', 'false');
+                    chip.addEventListener('click', function() {
+                        amenerCarteAEcran();
+                        selectionner(chip.dataset.secteur, true);
+                    });
+                });
+
+                if (resetBtn) {
+                    resetBtn.hidden = false;
+                    resetBtn.addEventListener('click', voirToutLaZone);
+                }
+            }
+
+            function init() {
+                if (typeof L === 'undefined') {
+                    echec('La carte n’a pas pu être chargée.');
+                    return;
+                }
+
+                if (fallback) fallback.remove();   // Leaflet n'efface pas le contenu du conteneur
+
+                const map = L.map(el, {
+                    scrollWheelZoom: false,          // évite de capturer le défilement de la page
+                    dragging: !L.Browser.mobile,     // sur mobile, la carte ne piège pas le doigt : les puces ci-contre servent à naviguer
+                    zoomControl: true
+                }).setView([CABINET.lat, CABINET.lng], 12);
+                fond().addTo(map);
+
+                // Molette activée uniquement après un clic dans la carte
+                map.on('click focus', function() { map.scrollWheelZoom.enable(); });
+                map.on('mouseout blur', function() { map.scrollWheelZoom.disable(); });
+
+                // La hauteur suit la colonne voisine : on prévient Leaflet quand elle change
+                if (typeof ResizeObserver !== 'undefined') {
+                    let attente = 0;
+                    new ResizeObserver(function() {
+                        cancelAnimationFrame(attente);
+                        attente = requestAnimationFrame(function() { map.invalidateSize(); });
+                    }).observe(el);
+                }
+
+                fetch(GEOJSON)
+                    .then(function(r) {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.json();
+                    })
+                    .then(function(donnees) { dessiner(map, donnees); })
+                    .catch(function(err) {
+                        // La carte de fond reste affichée : on signale seulement l'absence des secteurs.
+                        console.error('Secteurs indisponibles :', err);
+                        L.marker([CABINET.lat, CABINET.lng], { icon: pin() })
+                            .addTo(map)
+                            .bindPopup('<strong>Cabinet Infirmier La Terrasse</strong>31 impasse du Buis — Carré Santé<br>38660 La Terrasse');
+                    });
+            }
+
+            // Initialisation différée : la carte ne se charge qu'à l'approche de la section
+            function planifier() {
+                if (!('IntersectionObserver' in window)) { init(); return; }
+                const observateur = new IntersectionObserver(function(entrees) {
+                    if (entrees.some(function(e) { return e.isIntersecting; })) {
+                        observateur.disconnect();
+                        init();
+                    }
+                }, { rootMargin: '250px' });
+                observateur.observe(el);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', planifier);
+            } else {
+                planifier();
+            }
+        })();
 
         // Simple page switch between home and mentions
         document.querySelectorAll('a[href="#mentions"]').forEach(link => {
