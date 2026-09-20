@@ -3,140 +3,824 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cabinet Infirmier La Terrasse</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Cabinet Infirmier La Terrasse - Soins infirmiers à domicile conventionnés Assurance Maladie. 7j/7 de 7h30 à 20h.">
+    <title>Cabinet Infirmier La Terrasse - Soins à domicile</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bordeaux: #AF363D;
+            --terracotta: #C2A380;
+            --terracotta-clair: #E8C9AC;
+            --teal-confiance: #2F6B6B;
+            --teal-clair: #E4EFEE;
+            --encre: #2B2420;
+            --gris-chaud: #6E645C;
+            --blanc-casse: #FBF7F3;
+            --blanc-pur: #FFFFFF;
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Open Sans', sans-serif;
-            color: #333333;
-            background-color: #F0F0F0;
+            font-family: 'Inter', sans-serif;
+            color: var(--encre);
+            background-color: var(--blanc-casse);
+            line-height: 1.6;
         }
-        .header, .footer {
-            background-color: #FFFFFF;
+
+        /* Header & Logo */
+        header {
+            background: var(--blanc-casse);
+            border-bottom: 4px solid var(--terracotta);
+            padding: 2rem 1rem;
+            position: relative;
+            overflow: hidden;
         }
-        .navbar {
-            background-color: #5C85D6;
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
         }
-        .navbar a {
-            color: #FFFFFF;
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        .navbar a:hover {
-            color: #BBD1F8;
+
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--blanc-pur);
+            border-radius: 10px;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
         }
-        h1, h2 {
-            color: #333333;
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
         }
+
+        .logo-text h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--bordeaux);
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.875rem;
+            color: var(--gris-chaud);
+            margin-top: 0.25rem;
+        }
+
+        .phone-header {
+            text-align: right;
+            display: none;
+        }
+
+        .phone-header a {
+            font-weight: 600;
+            color: var(--bordeaux);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--blanc-pur);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            color: var(--encre);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--bordeaux);
+            border-bottom-color: var(--bordeaux);
+            background-color: var(--terracotta-clair);
+        }
+
+        /* Main content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--bordeaux);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--encre);
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-section {
+            background: var(--teal-clair);
+            border: 1px solid var(--teal-confiance);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            color: var(--gris-chaud);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Info cards grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background: var(--blanc-pur);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--bordeaux);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(175, 54, 61, 0.1);
+        }
+
+        .info-card h3 {
+            color: var(--bordeaux);
+            margin-bottom: 1rem;
+        }
+
+        .info-card.info-card--confiance {
+            border-left-color: var(--teal-confiance);
+            background: linear-gradient(180deg, var(--teal-clair) 0%, var(--blanc-pur) 55%);
+        }
+
+        .info-card.info-card--confiance h3 {
+            color: var(--teal-confiance);
+        }
+
+        .info-card.info-card--confiance .icon {
+            stroke: var(--teal-confiance);
+        }
+
+        .info-card p {
+            color: var(--gris-chaud);
+            font-size: 1rem;
+        }
+
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            stroke: var(--bordeaux);
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .service-card .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--encre);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--blanc-pur);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--terracotta-clair);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            border-color: var(--bordeaux);
+            background: linear-gradient(135deg, var(--blanc-pur) 0%, var(--terracotta-clair) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(175, 54, 61, 0.1);
+        }
+
+        .service-card h3 {
+            color: var(--bordeaux);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .service-card p {
+            color: var(--gris-chaud);
+            font-size: 1rem;
+        }
+
+        /* Contact & Map section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
         .map-container {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
             height: 400px;
+            border: none;
+            display: block;
         }
-        .footer {
-            background-color: #333333;
-            color: #FFFFFF;
-            padding: 20px;
+
+        .map-consent {
+            background: var(--blanc-pur);
+            padding: 2rem;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            gap: 0.5rem;
         }
-        .legal {
-            background-color: #5C85D6;
-            color: #FFFFFF;
-            padding: 10px;
-            font-size: 0.8rem;
+
+        .map-consent svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--terracotta);
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-bottom: 0.5rem;
+        }
+
+        .map-consent p {
+            color: var(--gris-chaud);
+            max-width: 320px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container iframe {
+                height: 300px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+
+            .phone-header {
+                display: block;
+                margin-top: 1rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                overflow-x: auto;
+            }
+
+            nav a {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--encre);
+            color: var(--blanc-casse);
+            padding: 2rem 1rem;
             text-align: center;
+            font-size: 1rem;
+        }
+
+        .legal-notice {
+            background: var(--bordeaux);
+            color: var(--blanc-pur);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .legal-notice p {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mentions-link {
+            color: var(--blanc-casse);
+            text-decoration: underline;
+            margin-left: 1rem;
+        }
+
+        .mentions-link:hover {
+            color: var(--blanc-pur);
+        }
+
+        /* Mentions légales page */
+        .mentions-container {
+            background: var(--blanc-pur);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .mentions-container h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--terracotta);
+            padding-bottom: 0.75rem;
+        }
+
+        .mentions-container h3:first-child {
+            margin-top: 0;
+        }
+
+        .mentions-container p {
+            margin-bottom: 1rem;
+            color: var(--gris-chaud);
+        }
+
+        .mentions-container ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gris-chaud);
+        }
+
+        .mentions-container li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Hidden sections for mentions page */
+        .mentions-only {
+            display: none;
+        }
+
+        .home-only {
+            display: block;
+        }
+
+        body.mentions-page .mentions-only {
+            display: block;
+        }
+
+        body.mentions-page .home-only {
+            display: none;
+        }
+
+        /* Responsive utilities */
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Accessibility */
+        a {
+            color: var(--bordeaux);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Button style for mentions link */
+        .mentions-button {
+            display: inline-block;
+            background: var(--bordeaux);
+            color: var(--blanc-pur);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .mentions-button:hover {
+            background: #6B1F2A;
+            text-decoration: none;
+        }
+
+        /* Skip to content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--bordeaux);
+            color: var(--blanc-pur);
+            padding: 8px;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
         }
     </style>
 </head>
 <body>
-    <header class="header bg-light py-3">
-        <div class="container">
-            <h1 class="text-center">Cabinet Infirmier La Terrasse</h1>
+    <a href="#main" class="skip-link">Aller au contenu principal</a>
+
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+            <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 22s7-7.58 7-12A7 7 0 0 0 5 10c0 4.42 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+            <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+            <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+            <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
+            <symbol id="icon-users" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.2c2.2.5 3.9 2.7 4.1 5.8"/></symbol>
+            <symbol id="icon-syringe" viewBox="0 0 24 24"><g transform="rotate(45 12 12)"><rect x="9" y="4" width="6" height="13" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="9" y1="7.5" x2="15" y2="7.5"/></g></symbol>
+            <symbol id="icon-bandage" viewBox="0 0 24 24"><g transform="rotate(45 12 12)"><rect x="4" y="9" width="16" height="6" rx="3"/><line x1="9" y1="9" x2="9" y2="15"/><line x1="15" y1="9" x2="15" y2="15"/></g></symbol>
+            <symbol id="icon-drip" viewBox="0 0 24 24"><path d="M8 3h8l1 6a5 5 0 0 1-10 0z"/><line x1="12" y1="14" x2="12" y2="17"/><path d="M12 17a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z"/></symbol>
+            <symbol id="icon-catheter" viewBox="0 0 24 24"><path d="M3 7c3 0 3 3 6 3s3-3 6-3 3 3 6 3"/><path d="M3 7v3"/><circle cx="21" cy="17" r="2"/><path d="M21 13v2"/></symbol>
+            <symbol id="icon-droplet" viewBox="0 0 24 24"><path d="M12 3s6 6.7 6 10.6A6 6 0 0 1 6 13.6C6 9.7 12 3 12 3z"/><line x1="10" y1="14" x2="14" y2="14"/></symbol>
+            <symbol id="icon-feeding" viewBox="0 0 24 24"><path d="M10 3h4v3l1.5 2v3.2a3.5 3.5 0 0 1-7 0V8l1.5-2z"/><path d="M12 11.5V16c0 2 2 3 2 5"/><circle cx="16" cy="21.3" r="1.3"/></symbol>
+            <symbol id="icon-wound" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="6" rx="3"/><line x1="8.5" y1="9" x2="9.5" y2="15"/><line x1="12" y1="9" x2="13" y2="15"/><line x1="15.5" y1="9" x2="16.5" y2="15"/></symbol>
+            <symbol id="icon-hands" viewBox="0 0 24 24"><path d="M12 5.5a3.2 3.2 0 0 1 3.2 3.2c0 2.4-3.2 4.8-3.2 4.8s-3.2-2.4-3.2-4.8A3.2 3.2 0 0 1 12 5.5z"/><path d="M3.5 16c2-1.8 4.3-1.8 8.5-1.8s6.5 0 8.5 1.8c-1 2.6-3.6 4.5-8.5 4.5s-7.5-1.9-8.5-4.5z"/></symbol>
+            <symbol id="icon-cane" viewBox="0 0 24 24"><circle cx="10" cy="5" r="2.2"/><path d="M10 8c-2 0-3 2-3 4v9"/><path d="M15.5 6.2v6.3L13 21"/></symbol>
+            <symbol id="icon-stoma" viewBox="0 0 24 24"><circle cx="12" cy="6.5" r="3"/><path d="M9 9.5v3.5a3 3 0 0 0 6 0V9.5"/><rect x="9" y="15" width="6" height="6" rx="2"/></symbol>
+            <symbol id="icon-hygiene" viewBox="0 0 24 24"><path d="M9 3s-4.2 5.2-4.2 8.2a4.2 4.2 0 0 0 8.4 0C13.2 8.2 9 3 9 3z"/><circle cx="17" cy="15.5" r="2"/><circle cx="19.5" cy="19" r="1.1"/></symbol>
+            <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M12 21s-8-4.5-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.5-8 11-8 11z"/></symbol>
+            <symbol id="icon-vial" viewBox="0 0 24 24"><path d="M9 2.5h6"/><path d="M10 2.5v6L6 17a2 2 0 0 0 2 2.8h8a2 2 0 0 0 2-2.8l-4-8.5v-6"/><line x1="8" y1="13.5" x2="16" y2="13.5"/></symbol>
+            <symbol id="icon-pill" viewBox="0 0 24 24"><g transform="rotate(-45 12 12)"><rect x="3" y="9" width="18" height="6" rx="3"/><line x1="12" y1="9" x2="12" y2="15"/></g></symbol>
+        </defs>
+    </svg>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <img src="assets/logo.svg" alt="Logo du Cabinet Infirmier La Terrasse : cœur en forme de stéthoscope">
+                </div>
+                <div class="logo-text">
+                    <h1>Cabinet Infirmier<br>La Terrasse</h1>
+                    <p>Infirmières libérales conventionnées</p>
+                </div>
+            </div>
+            <div class="phone-header">
+                <a href="tel:+33476082270">04.76.08.22.70</a>
+            </div>
         </div>
     </header>
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <div class="navbar-nav">
-                <a class="nav-link" href="#contact">Contact</a>
-                <a class="nav-link" href="#plan">Plan</a>
-            </div>
-            <div class="navbar-text ml-auto">
-                <p class="m-0">Téléphone : 04.76.08.22.70</p>
-            </div>
+    <nav>
+        <div class="nav-container">
+            <a href="#informations">Informations pratiques</a>
+            <a href="#services">Soins prodigués</a>
+            <a href="#contact">Contact</a>
+            <a href="#mentions">Mentions légales</a>
         </div>
     </nav>
 
-    <section class="container my-5">
-        <h2 class="mb-4">Cabinet Infirmier Conventionné</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="cabinet.jpg" class="card-img-top" alt="Cabinet Infirmier La Terrasse">
-                    <div class="card-body">
-                        <h5 class="card-title">Le Cabinet</h5>
-                        <p class="card-text">Découvrez notre cabinet situé au cœur de La Terrasse, offrant un cadre accueillant et professionnel pour tous vos soins infirmiers.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h4  id="contact"  class="card-title">Informations Pratiques</h4>
-                        <p class="card-text">
-                            <p><strong>Horaires d'ouverture :</strong><br/>7j/7 de 7h30 - 20h</p>
-                            <p><strong>Téléphone :</strong><br/>04.76.08.22.70</p>
+    <main id="main">
+        <!-- HOME CONTENT -->
+        <div class="home-only">
+            <section id="informations" class="intro-section">
+                <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Cabinet infirmier conventionné Assurance Maladie • Soins à domicile • Disponible 7j/7 de 7h30 à 20h</p>
+            </section>
 
-                            <p><strong>Secteurs :</strong><br/> La Terrasse | Lumbin | Petit Lumbin <br/> La Frette | Le carré | Chonas <br/> Route de Montabon</p>
-                            <p><strong>Adresse :</strong><br/> 2 place de la cave<br/>38660 - La Terrasse</p>
-                            <p><strong>Email :</strong><br/>idellacave@gmail.com</p>
-                            <p><strong>Infirmières :</strong><br/>Cindy MAYORGAS, Claire BLANCHETON</p>
-                            
-                        </p>
+            <section id="services">
+                <h2>Soins prodigués</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-syringe"></use></svg>Bilan sanguin • Injections • Saignées</h3>
+                        <p>Prise en charge des prélèvements sanguins, injections et saignées</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-bandage"></use></svg>Pansement</h3>
+                        <p>Réfection de pansements simples ou complexes</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-drip"></use></svg>Perfusions</h3>
+                        <p>Organisation, gestion et surveillance des perfusions simples ou complexes (chambres implantables ou PICC line)</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-catheter"></use></svg>Sondage</h3>
+                        <p>Sondages urinaires, intermittents</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-droplet"></use></svg>Prise en charge des diabétiques</h3>
+                        <p>Éducation thérapeutique, suivi et surveillance des patients diabétiques</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-feeding"></use></svg>Alimentation entérale et parentérale</h3>
+                        <p>Organisation, pose et surveillance des perfusions entérales ou parentérales</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-wound"></use></svg>Soins de plaies</h3>
+                        <p>Prise en charge des plaies chroniques et complexes, avec suivi régulier</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-hands"></use></svg>Nursing</h3>
+                        <p>Soins quotidiens d'assistance personnelle pour maintien d'hygiène et confort du patient</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-cane"></use></svg>Prise en charge des personnes âgées</h3>
+                        <p>Soins et accompagnement des personnes âgées, avec suivi régulier</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-stoma"></use></svg>Soins de stomie</h3>
+                        <p>Organisation, pose et surveillance des stomies digestives et urinaires</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-hygiene"></use></svg>Soins d'hygiène</h3>
+                        <p>Aide aux actes d'hygiène quotidienne</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>Soins palliatifs</h3>
+                        <p>Accompagnement dans le soulagement de la douleur et le confort en fin de vie</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-vial"></use></svg>Chimiothérapie</h3>
+                        <p>Administration et suivi des traitements de chimiothérapie</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><svg class="icon" aria-hidden="true"><use href="#icon-pill"></use></svg>Administration de traitements</h3>
+                        <p>Prise en charge de personnes dépendantes pour l'administration de traitements médicamenteux</p>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <section id="contact">
+                <h2>Nous contacter</h2>
+                <div class="contact-grid">
+                    <div class="info-grid" style="grid-template-columns: 1fr; gap: 1rem;">
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Adresse</h3>
+                            <p>31 impasse du Buis<br>Carré Santé<br>38660 La Terrasse</p>
+                        </div>
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>Téléphone</h3>
+                            <p><a href="tel:+33476082270">04.76.08.22.70</a></p>
+                        </div>
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>Email</h3>
+                            <p><a href="mailto:idellacave@gmail.com">idellacave@gmail.com</a></p>
+                        </div>
+                        <div class="info-card info-card--confiance">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg>Horaires</h3>
+                            <p>7 jours sur 7<br>7h30 - 20h</p>
+                        </div>
+                        <div class="info-card">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg>Infirmières</h3>
+                            <p>Cindy Mayorgas<br>Claire Blancheton</p>
+                        </div>
+                        <div class="info-card info-card--confiance">
+                            <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Secteurs desservis</h3>
+                            <p>La Terrasse • Lumbin • Petit Lumbin<br>La Frette • Le Carré • Chonas<br>Route de Montabon • Le Touvet</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <div class="map-consent" id="map-consent">
+                            <svg aria-hidden="true"><use href="#icon-pin"></use></svg>
+                            <p>Cette carte est fournie par Google Maps et dépose des cookies tiers lors de son chargement.</p>
+                            <button type="button" class="mentions-button" id="load-map-btn">Afficher la carte</button>
+                        </div>
+                        <iframe id="map-iframe" data-src="https://www.google.com/maps?q=31+Impasse+du+Buis,+Carr%C3%A9+Sant%C3%A9,+38660+La+Terrasse&output=embed" title="Localisation du cabinet - 31 impasse du Buis, Carré Santé, 38660 La Terrasse" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" hidden></iframe>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
-    
 
-    <section id="plan" class="container my-5">
+        <!-- MENTIONS LÉGALES PAGE -->
+        <div class="mentions-only">
+            <section id="mentions">
+                <h2>Mentions légales</h2>
+                <div class="mentions-container">
+                    <h3>1. Identification de l'éditeur</h3>
+                    <ul>
+                        <li><strong>Raison sociale :</strong> Cabinet Infirmier La Terrasse</li>
+                        <li><strong>Infirmières :</strong> Cindy Mayorgas et Claire Blancheton</li>
+                        <li><strong>Adresse professionnelle :</strong> 31 impasse du Buis, Carré Santé, 38660 La Terrasse</li>
+                        <li><strong>Téléphone :</strong> 04.76.08.22.70</li>
+                        <li><strong>Email :</strong> idellacave@gmail.com</li>
+                        <li><strong>Statut :</strong> Infirmières libérales conventionnées Assurance Maladie</li>
+                        <li><strong>Numéro RPPS/ADELI :</strong> <em>[à compléter par le cabinet avant mise en ligne]</em></li>
+                    </ul>
 
-        <h2>Plan</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Cabinet infirmer</h5>
-                        <p class="card-text">
-                            <p>Adresse : 2 place de la cave</p>
-                            <p>Téléphone : 04.76.08.22.70</p>
-                            <p>Email : idellacave@gmail.com</p>
-                        </p>
-                    </div>
+                    <h3>2. Directeur de la publication</h3>
+                    <p>Cindy Mayorgas et Claire Blancheton, infirmières libérales</p>
+
+                    <h3>3. Hébergement du site</h3>
+                    <p><em>[À compléter avant mise en ligne : nom, adresse et contact de l'hébergeur du site, conformément à l'article 6-III de la LCEN (loi n° 2004-575 du 21 juin 2004)]</em></p>
+
+                    <h3>4. Conseil de l'Ordre professionnel</h3>
+                    <p>Conseil Interdépartemental de l'Ordre des Infirmiers Ain-Isère (CIDOI 01-38)<br>
+                    75 rue de la Villette, 69003 Lyon<br>
+                    Tél. : 04 82 91 02 97<br>
+                    Email : cidoi01-38@ordre-infirmiers.fr<br>
+                    Site : <a href="https://01-38.cidoi.fr" target="_blank" rel="noopener">01-38.cidoi.fr</a></p>
+
+                    <h3>5. Propriété intellectuelle</h3>
+                    <p>L'ensemble du contenu de ce site (textes, images, logos, pictogrammes) est la propriété du Cabinet Infirmier La Terrasse ou de ses partenaires. Toute reproduction, distribution ou transmission de ce contenu sans autorisation écrite préalable est interdite.</p>
+
+                    <h3>6. Données personnelles et RGPD</h3>
+                    <p>Ce site n'effectue pas la collecte systématique de données personnelles. Les coordonnées fournies sont destinées à faciliter le contact avec le cabinet pour les besoins médicaux.</p>
+                    <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits d'accès, de rectification, de suppression et d'opposition concernant vos données personnelles. Pour exercer ces droits, contactez le cabinet à l'adresse indiquée ci-dessus.</p>
+
+                    <h3>7. Cookies</h3>
+                    <p>Ce site intègre une carte Google Maps en section Contact. Pour éviter tout dépôt de cookies tiers sans consentement, cette carte ne se charge pas automatiquement : elle n'est affichée qu'après un clic explicite de l'internaute sur le bouton « Afficher la carte ». Aucun cookie Google Maps n'est déposé tant que cette action n'a pas été effectuée volontairement.</p>
+                    <p>En dehors de cette carte, ce site ne dépose aucun cookie de mesure d'audience ni de traceur publicitaire.</p>
+
+                    <h3>8. Déclaration de conformité déontologique</h3>
+                    <p>Ce site a pour but d'informer les patients des soins pratiqués par le cabinet de soins infirmier. Conformément à l'article R4312-37 du code de la santé publique, il n'a pas vocation à faire la promotion de l'activité de soins infirmiers.</p>
+                    <p>Le contenu publié respecte les dispositions des articles R.4312-37 à R.4312-39 du Code de la santé publique et les recommandations de l'Ordre National des Infirmiers concernant la communication des professionnels infirmiers.</p>
+
+                    <h3>9. Limitation de responsabilité</h3>
+                    <p>Ce site est fourni à titre informatif. Le Cabinet Infirmier La Terrasse décline toute responsabilité quant aux erreurs ou omissions pouvant figurer sur le site. Les informations fournies ne sauraient en aucun cas se substituer à une consultation médicale.</p>
+
+                    <h3>10. Droit applicable et juridiction</h3>
+                    <p>Ce site est soumis au droit français. Tout litige relatif à l'utilisation du site sera soumis à la juridiction des tribunaux compétents.</p>
+
+                    <h3>11. Modification des mentions</h3>
+                    <p>Le Cabinet Infirmier La Terrasse se réserve le droit de modifier les présentes mentions légales à tout moment. Les modifications seront effectives immédiatement après leur publication sur le site.</p>
+
+                    <h3>12. Contact et réclamations</h3>
+                    <p>Pour toute question concernant ces mentions légales ou le site, veuillez contacter :</p>
+                    <p><strong>Cabinet Infirmier La Terrasse</strong><br>
+                    31 impasse du Buis, Carré Santé<br>
+                    38660 La Terrasse<br>
+                    Tél. : 04.76.08.22.70<br>
+                    Email : idellacave@gmail.com</p>
+
+                    <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--gris-chaud); border-top: 2px solid var(--terracotta); padding-top: 1rem;">
+                        <strong>Dernière mise à jour :</strong> 20 septembre 2026
+                    </p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="map-container">
-                    <!-- Intégration de Google Maps -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d302.6366043686429!2d5.929967462773102!3d45.32243283045352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478a50c2fb9b562f%3A0xe1d3f6436076fdb!2s2%20Pl.%20de%20la%20Cave%2C%2038660%20La%20Terrasse!5e0!3m2!1sfr!2sfr!4v1711402875804!5m2!1sfr!2sfr" width="350" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                <div style="text-align: center;">
+                    <a href="#" onclick="window.location.href = window.location.pathname; return false;" class="mentions-button">Retour à l'accueil</a>
                 </div>
-            </div>
+            </section>
         </div>
-        
-        
-        
-    </section>
+    </main>
 
-    <div class="legal">
+    <div class="legal-notice">
         <p>Ce site a pour but d'informer les patients des soins pratiqués par le cabinet de soins infirmier. Conformément à l'article R4312-37 du code de la santé publique, il n'a pas vocation à faire la promotion de l'activité de soins infirmiers.
-        <br/>Pour plus d'informations, consulte le site de <a href="https://www.ordre-infirmiers.fr">l'ordre des infirmiers</a></p>
+            <a href="#mentions" class="mentions-link">Mentions légales</a>
+        </p>
     </div>
-    
-    <footer class="footer mt-auto py-3">
-        <div class="container text-center">
-            <span class="text-muted">Cabinet Infirmier La Terrasse &copy; 2024</span>
-        </div>
+
+    <footer>
+        <p>Cabinet Infirmier La Terrasse © 2026</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem; color: rgba(251, 247, 243, 0.75);">Soins infirmiers à domicile • Conventionné Assurance Maladie</p>
     </footer>
 
+    <script>
+        // Chargement différé de Google Maps (consentement cookies tiers)
+        document.getElementById('load-map-btn')?.addEventListener('click', function() {
+            const iframe = document.getElementById('map-iframe');
+            const consent = document.getElementById('map-consent');
+            iframe.src = iframe.dataset.src;
+            iframe.hidden = false;
+            consent.remove();
+        });
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        // Simple page switch between home and mentions
+        document.querySelectorAll('a[href="#mentions"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (window.location.hash !== '#mentions') {
+                    e.preventDefault();
+                    document.body.classList.add('mentions-page');
+                    window.location.hash = '#mentions';
+                    window.scrollTo(0, 0);
+                }
+            });
+        });
+
+        // Handle back to home from mentions
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#mentions') {
+                document.body.classList.add('mentions-page');
+            }
+
+            // Add back to home functionality
+            document.querySelectorAll('a[href="#services"], a[href="#contact"], a[href="#informations"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (document.body.classList.contains('mentions-page')) {
+                        e.preventDefault();
+                        document.body.classList.remove('mentions-page');
+                        window.location.hash = '';
+                        setTimeout(() => {
+                            const target = document.querySelector(this.getAttribute('href'));
+                            if (target) target.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                    }
+                });
+            });
+        });
+
+        // Handle browser back button from mentions page
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash !== '#mentions') {
+                document.body.classList.remove('mentions-page');
+            } else {
+                document.body.classList.add('mentions-page');
+            }
+        });
+    </script>
 </body>
 </html>
