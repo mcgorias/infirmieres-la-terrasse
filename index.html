@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cabinet Infirmier La Terrasse - Soins infirmiers à domicile conventionnés Assurance Maladie. 7j/7 de 7h30 à 20h.">
+    <meta name="description" content="Cabinet Infirmier La Terrasse - Soins infirmiers à domicile conventionnés Assurance Maladie. 7j/7 de 7h à 20h.">
     <title>Cabinet Infirmier La Terrasse - Soins à domicile</title>
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1017,10 +1017,10 @@
         <!-- HOME CONTENT -->
         <div class="home-only">
             
-            <section id="informations" class="intro-section" data-open-start="7:30" data-open-end="20:00">
+            <section id="informations" class="intro-section" data-open-start="7:00" data-open-end="20:00">
                 <p class="intro-status"></span><span id="intro-status-text">Cabinet infirmier conventionné Assurance Maladie</span></p>
                 
-                <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Soins infirmiers à domicile <br/>7j/7 de 7h30 à 20h</p>
+                <p style="font-size: 1.05rem; color: var(--encre); font-weight: 500;">Soins infirmiers à domicile <br/>7j/7 de 7h à 20h</p>
             </section>
             <section id="call-button">
                 <p class="intro-invite" id="intro-invite">
@@ -1062,7 +1062,7 @@
                                 </div>
                                 <div class="info-row">
                                     <dt><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg>Horaires</dt>
-                                    <dd>7 jours sur 7<br>7h30 - 20h</dd>
+                                    <dd>7 jours sur 7<br>7h - 20h</dd>
                                 </div>
                                 <div class="info-row">
                                     <dt><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Adresse</dt>
@@ -1251,7 +1251,7 @@
     </footer>
 
     <script>
-        // Statut d'ouverture dynamique (7j/7, 7h30-20h00, heure locale du visiteur)
+        // Statut d'ouverture dynamique (7j/7, 7h00-20h00, heure locale du visiteur)
         (function() {
             const section = document.getElementById('informations');
             if (!section) return;
@@ -1262,7 +1262,7 @@
 
             const now = new Date();
             const minutes = now.getHours() * 60 + now.getMinutes();
-            const openStart = 7 * 60 + 30;
+            const openStart = 7 * 60;
             const openEnd = 20 * 60;
             const isOpen =  minutes >= openStart && minutes < openEnd;
             
@@ -1281,7 +1281,7 @@
             if (isOpen) {
                 statusText.textContent = 'Cabinet actuellement ouvert';
             } else {
-                statusText.innerHTML = 'Cabinet actuellement fermé - Ouvre à 7h30';
+                statusText.innerHTML = 'Cabinet actuellement fermé - Ouvre à 7h';
             }
             invite.innerHTML = cta;
         })();
