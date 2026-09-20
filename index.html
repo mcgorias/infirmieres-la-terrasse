@@ -498,7 +498,25 @@
             }
 
             .header-container {
-                flex-direction: column;
+                display: block;
+            }
+
+            .logo-section {
+                position: relative;
+                width: 100%;
+            }
+
+            .logo-icon {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 56px;
+                height: 56px;
+            }
+
+            .logo-text {
+                width: 100%;
                 text-align: center;
             }
 
@@ -755,11 +773,11 @@
                 <div class="faq-list">
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-syringe"></use></svg>Mon médecin m'a prescrit une prise de sang, une injection ou une saignée : comment cela se passe-t-il ?</summary>
-                        <div class="faq-answer">Ces actes sont réalisés à domicile, sur prescription médicale, dans le respect des règles d'hygiène et de sécurité. Le prélèvement est ensuite acheminé vers le laboratoire de votre choix.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/themes" target="_blank" rel="noopener">ameli.fr</a></p></div>
+                        <div class="faq-answer">Ces actes sont réalisés à domicile, sur prescription médicale, dans le respect des règles d'hygiène et de sécurité. Le prélèvement est ensuite acheminé vers le laboratoire de votre choix.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/examen/analyse" target="_blank" rel="noopener">ameli.fr — Analyses de sang</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-bandage"></use></svg>Qu'est-ce qu'un pansement simple ou complexe ?</summary>
-                        <div class="faq-answer">Un pansement simple concerne une plaie superficielle ; un pansement complexe (plaie chronique, post-opératoire, escarre) suit un protocole spécifique défini avec le médecin prescripteur et fait l'objet d'un suivi régulier.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/themes" target="_blank" rel="noopener">ameli.fr</a></p></div>
+                        <div class="faq-answer">Un pansement simple concerne une plaie superficielle ; un pansement complexe (plaie chronique, post-opératoire, escarre) suit un protocole spécifique défini avec le médecin prescripteur et fait l'objet d'un suivi régulier.<p class="faq-source">Pour en savoir plus : <a href="https://www.has-sante.fr/jcms/r_1438004/fr/les-pansements-indications-et-utilisations-recommandees-fiche-buts" target="_blank" rel="noopener">Haute Autorité de Santé — Les pansements</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-drip"></use></svg>Mon médecin m'a prescrit une perfusion, qu'est-ce que cela signifie ?</summary>
@@ -767,7 +785,7 @@
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-catheter"></use></svg>En quoi consiste un sondage urinaire ?</summary>
-                        <div class="faq-answer">Il s'agit de la pose ou de la gestion d'une sonde urinaire, ponctuelle (intermittente) ou à demeure, sur prescription médicale, avec surveillance des complications éventuelles.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/themes" target="_blank" rel="noopener">ameli.fr</a></p></div>
+                        <div class="faq-answer">Il s'agit de la pose ou de la gestion d'une sonde urinaire, ponctuelle (intermittente) ou à demeure, sur prescription médicale, avec surveillance des complications éventuelles.<p class="faq-source">Pour en savoir plus : <a href="https://www.ameli.fr/assure/sante/themes/incontinence-urinaire" target="_blank" rel="noopener">ameli.fr — Incontinence urinaire</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-droplet"></use></svg>Je suis diabétique, que peut m'apporter un suivi infirmier à domicile ?</summary>
@@ -779,7 +797,7 @@
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-wound"></use></svg>J'ai une plaie qui ne cicatrise pas, que faire ?</summary>
-                        <div class="faq-answer">Les plaies chroniques ou complexes nécessitent un suivi régulier et un protocole de soins adapté, défini en lien avec le médecin traitant.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/themes" target="_blank" rel="noopener">ameli.fr</a></p></div>
+                        <div class="faq-answer">Les plaies chroniques ou complexes nécessitent un suivi régulier et un protocole de soins adapté, défini en lien avec le médecin traitant.<p class="faq-source">Pour en savoir plus : <a href="https://www.has-sante.fr/jcms/r_1438004/fr/les-pansements-indications-et-utilisations-recommandees-fiche-buts" target="_blank" rel="noopener">Haute Autorité de Santé — Les pansements</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-stoma"></use></svg>Qu'est-ce qu'un soin de stomie ?</summary>
@@ -787,23 +805,23 @@
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-hands"></use></svg>Mon médecin a prescrit du "nursing", qu'est-ce que c'est ?</summary>
-                        <div class="faq-answer">Le nursing désigne les soins quotidiens d'assistance à la personne (aide à la toilette, au lever, au confort) pour les patients qui en ont besoin, sur prescription.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/bons-gestes/seniors/maintien-domicile" target="_blank" rel="noopener">ameli.fr — Maintien à domicile</a></p></div>
+                        <div class="faq-answer">Le nursing désigne les soins quotidiens d'assistance à la personne (aide à la toilette, au lever, au confort) pour les patients qui en ont besoin, sur prescription.<p class="faq-source">Pour en savoir plus : <a href="https://www.pour-les-personnes-agees.gouv.fr/vivre-a-domicile/beneficier-d-aide-a-domicile" target="_blank" rel="noopener">pour-les-personnes-agees.gouv.fr — Bénéficier d’aide à domicile</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-cane"></use></svg>Quel accompagnement pour une personne âgée à domicile ?</summary>
-                        <div class="faq-answer">Le suivi d'une personne âgée à domicile s'inscrit dans une prise en charge coordonnée avec le médecin traitant et les autres intervenants, adaptée à son état de santé et à son degré d'autonomie.<p class="faq-source">Pour en savoir plus : <a href="https://www.ameli.fr/assure/sante/bons-gestes/seniors/maintien-domicile" target="_blank" rel="noopener">ameli.fr — Maintien à domicile</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
+                        <div class="faq-answer">Le suivi d'une personne âgée à domicile s'inscrit dans une prise en charge coordonnée avec le médecin traitant et les autres intervenants, adaptée à son état de santé et à son degré d'autonomie.<p class="faq-source">Pour en savoir plus : <a href="https://www.pour-les-personnes-agees.gouv.fr/vivre-a-domicile/beneficier-de-soins-a-domicile/les-ssiad-services-de-soins-infirmiers-a-domicile" target="_blank" rel="noopener">pour-les-personnes-agees.gouv.fr — Les SSIAD</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>Qu'est-ce que les soins palliatifs à domicile ?</summary>
-                        <div class="faq-answer">Il s'agit d'un accompagnement centré sur le soulagement de la douleur et le confort du patient en fin de vie, en coordination avec l'équipe médicale.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/themes" target="_blank" rel="noopener">ameli.fr</a></p></div>
+                        <div class="faq-answer">Il s'agit d'un accompagnement centré sur le soulagement de la douleur et le confort du patient en fin de vie, en coordination avec l'équipe médicale.<p class="faq-source">Pour en savoir plus : <a href="https://www.ameli.fr/assure/droits-demarches/fin-de-vie-deuil/proche-fin-vie" target="_blank" rel="noopener">ameli.fr — Proche en fin de vie</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-vial"></use></svg>Qu'est-ce qu'une chimiothérapie administrée à domicile ?</summary>
-                        <div class="faq-answer">Certains protocoles de chimiothérapie peuvent être administrés par voie veineuse en dehors du milieu hospitalier, lorsque l'état du patient et le protocole médical le permettent, toujours sur prescription et sous surveillance.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/themes" target="_blank" rel="noopener">ameli.fr</a></p></div>
+                        <div class="faq-answer">Certains protocoles de chimiothérapie peuvent être administrés par voie veineuse en dehors du milieu hospitalier, lorsque l'état du patient et le protocole médical le permettent, toujours sur prescription et sous surveillance.<p class="faq-source">Pour en savoir plus : <a href="https://www.e-cancer.fr/Patients-et-proches" target="_blank" rel="noopener">e-cancer.fr — Institut national du cancer</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                     <details class="faq-item">
                         <summary><svg class="icon" aria-hidden="true"><use href="#icon-pill"></use></svg>Comment se passe l'administration des traitements d'un proche dépendant ?</summary>
-                        <div class="faq-answer">Lorsqu'une personne dépendante ne peut pas gérer seule la prise de ses traitements, un infirmier peut intervenir sur prescription médicale pour leur administration et leur suivi.<p class="faq-source">Pour en savoir plus : <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a> · <a href="https://www.ameli.fr/assure/sante/bons-gestes/seniors/maintien-domicile" target="_blank" rel="noopener">ameli.fr — Maintien à domicile</a></p></div>
+                        <div class="faq-answer">Lorsqu'une personne dépendante ne peut pas gérer seule la prise de ses traitements, un infirmier peut intervenir sur prescription médicale pour leur administration et leur suivi.<p class="faq-source">Pour en savoir plus : <a href="https://solidarites.gouv.fr/aidant" target="_blank" rel="noopener">solidarites.gouv.fr — Soutenir les aidants</a> · <a href="https://www.ordre-infirmiers.fr/patient" target="_blank" rel="noopener">Ordre national des infirmiers</a></p></div>
                     </details>
                 </div>
             </section>
@@ -884,14 +902,13 @@
     </main>
 
     <div class="legal-notice">
-        <p>Ce site a pour objet de fournir aux patients et à leurs proches des informations pratiques sur le cabinet (coordonnées, horaires, secteur d'intervention) ainsi que des repères éducatifs généraux, à caractère scientifique, sur des termes médicaux courants. Conformément à l'article R.4312-37 du code de la santé publique, il n'a pas vocation à faire la promotion de l'activité infirmière ni à décrire ou énumérer les soins dispensés par le cabinet.
+        <p>Site à visée purement informative (art. R.4312-37 du code de la santé publique).
             <a href="#mentions" class="mentions-link">Mentions légales</a>
         </p>
     </div>
 
     <footer>
-        <p>Cabinet Infirmier La Terrasse © 2026</p>
-        <p style="font-size: 0.9rem; margin-top: 0.5rem; color: rgba(251, 247, 243, 0.75);">Soins infirmiers à domicile • Conventionné Assurance Maladie</p>
+        <p>Cabinet Infirmier La Terrasse © 2026 · Conventionné Assurance Maladie</p>
     </footer>
 
     <script>
