@@ -54,8 +54,7 @@
             margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
+            justify-content: center;
         }
 
         .logo-section {
@@ -65,15 +64,11 @@
         }
 
         .logo-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--blanc-pur);
-            border-radius: 10px;
-            padding: 6px;
+            width: 72px;
+            height: 72px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             flex-shrink: 0;
         }
 
@@ -81,7 +76,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 4px;
         }
 
         .logo-text h1 {
@@ -96,26 +90,6 @@
             font-size: 0.875rem;
             color: var(--gris-chaud);
             margin-top: 0.25rem;
-        }
-
-        .phone-header {
-            text-align: right;
-            display: none;
-        }
-
-        .phone-header a {
-            font-weight: 600;
-            color: var(--bordeaux);
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-
-        .phone-header .phone-invite {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--gris-chaud);
-            margin-top: 0.15rem;
         }
 
         /* Navigation */
@@ -506,11 +480,6 @@
                 font-size: 1.1rem;
             }
 
-            .phone-header {
-                display: block;
-                margin-top: 1rem;
-            }
-
             .header-container {
                 flex-direction: column;
                 text-align: center;
@@ -528,19 +497,6 @@
                 text-align: center;
             }
 
-            .phone-header {
-                order: -1;
-                margin-top: 0;
-                margin-bottom: 0.5rem;
-            }
-
-            .phone-header a {
-                font-size: 1.3rem;
-            }
-
-            .phone-header .phone-invite {
-                font-size: 0.85rem;
-            }
         }
 
         /* Footer */
@@ -714,10 +670,6 @@
                     <h1>Cabinet Infirmier<br>La Terrasse</h1>
                     <p>Infirmières libérales conventionnées</p>
                 </div>
-            </div>
-            <div class="phone-header">
-                <a href="tel:+33476082270">04.76.08.22.70</a>
-                <span class="phone-invite" id="phone-invite">Joindre le cabinet</span>
             </div>
         </div>
     </header>
@@ -932,7 +884,6 @@
             if (!section) return;
             const statusText = document.getElementById('intro-status-text');
             const invite = document.getElementById('intro-invite');
-            const phoneInvite = document.getElementById('phone-invite');
             const tel = '0476082270';
             const telDisplay = '04.76.08.22.70';
 
@@ -947,11 +898,9 @@
             if (isOpen) {
                 statusText.textContent = 'Cabinet actuellement ouvert';
                 invite.innerHTML = 'Un appel ou un SMS au <a href="tel:+33' + tel.slice(1) + '">' + telDisplay + '</a> permet de joindre le cabinet.';
-                if (phoneInvite) phoneInvite.textContent = 'Joindre le cabinet';
             } else {
                 statusText.textContent = 'Cabinet actuellement fermé';
                 invite.innerHTML = 'En dehors des horaires, un SMS ou un message vocal au <a href="tel:+33' + tel.slice(1) + '">' + telDisplay + '</a> reste possible.';
-                if (phoneInvite) phoneInvite.textContent = 'Laisser un message ou un SMS';
             }
         })();
 
